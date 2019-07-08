@@ -18,10 +18,13 @@ array, then arraySize contains its size */
     // If this is an array, then size specifies
     // the size of the array.
 
-    PtrDetails(void)
-    {
         // TODO: Implement PtrDetails
-    }
+        if(arr_size > 0)
+        {
+            isArray = true;
+            arraySize = arr_size;
+            memPtr = first_param;
+        }
 };
 // Overloading operator== allows two class objects to be compared.
 // This is needed by the STL list class.
@@ -29,5 +32,14 @@ template <class T>
 bool operator==(const PtrDetails<T> &ob1,
                 const PtrDetails<T> &ob2)
 {
-    // TODO: Implement operator==
+        // TODO: Implement operator==      
+        if(obj_1.refcount != obj_2.refcount
+        || obj_1.memPtr != obj_2.memPtr
+        || obj_1.isArray != obj_2.isArray
+        || obj_1.arraySize != obj_2.arraySize)
+        {
+            return false;
+        }
+        
+        return true;
 }
