@@ -110,13 +110,19 @@ Pointer<T,size>::Pointer(T *t){
     // Lab: Smart Pointer Project Lab
     Pointer(t);
 }
-// Copy constructor.
+
+// Copy constructor of Pointer class
 template< class T, int size>
 Pointer<T,size>::Pointer(const Pointer &ob){
-
-    // TODO: Implement Pointer constructor
-    // Lab: Smart Pointer Project Lab
-    Pointer(ob);
+    typename std::list<PtrDetails<T> >::iterator p;
+    p = findPtrInfo(ob.addr);
+    p->refcount++; // increment ref count
+    addr = ob.addr;
+    arraySize = ob.arraySize;
+    if (arraySize > 0)
+        isArray = true;
+    else
+        isArray = false;
 }
 
 // Destructor for Pointer.
@@ -171,15 +177,22 @@ T *Pointer<T, size>::operator=(T *t){
     // LAB: Smart Pointer Project Lab
     operator==(t);
 }
-// Overload assignment of Pointer to Pointer.
+
+// Overload assignment of Pointer to Pointer. (i.e ptr = ptr)
 template <class T, int size>
 Pointer<T, size> &Pointer<T, size>::operator=(Pointer &rv){
-
-    // TODO: Implement operator==
-    // LAB: Smart Pointer Project Lab
-    operator==(rv);
+    typename std::list<PtrDetails<T> >::iterator p;
+    // First, decrement the reference count
+    // for the memory currently being pointed to.
+    p = findPtrInfo(addr);
+    p->refcount--;
+    // Next, increment the reference count of
+    // the new address.
+    p = findPtrInfo(rv.addr);
+    p->refcount++;  // increment ref count
+    addr = rv.addr; // store the address.
+    return rv;
 }
-
 // A utility function that displays refContainer.
 template <class T, int size>
 void Pointer<T, size>::showlist(){
