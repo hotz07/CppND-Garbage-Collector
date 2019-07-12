@@ -1,4 +1,4 @@
-// This class defines an element that is stored
+    // This class defines an element that is stored
 // in the garbage collection information list.
 //
 template <class T>
@@ -37,4 +37,35 @@ bool operator==(const PtrDetails<T> &ob1,
 {
         // TODO: Implement operator==      
         return (obj_1.memPtr == obj_2.memPtr);
+}
+
+
+// Copy constructor of Pointer class
+template< class T, int size>
+Pointer<T,size>::Pointer(const Pointer &ob){
+    typename std::list<PtrDetails<T> >::iterator p;
+    p = findPtrInfo(ob.addr);
+    p->refcount++; // increment ref count
+    addr = ob.addr;
+    arraySize = ob.arraySize;
+    if (arraySize > 0)
+        isArray = true;
+    else
+        isArray = false;
+}
+
+// Overload assignment of Pointer to Pointer. (i.e ptr = ptr)
+template <class T, int size>
+Pointer<T, size> &Pointer<T, size>::operator=(Pointer &rv){
+    typename std::list<PtrDetails<T> >::iterator p;
+    // First, decrement the reference count
+    // for the memory currently being pointed to.
+    p = findPtrInfo(addr);
+    p->refcount--;
+    // Next, increment the reference count of
+    // the new address.
+    p = findPtrInfo(rv.addr);
+    p->refcount++;  // increment ref count
+    addr = rv.addr; // store the address.
+    return rv;
 }
