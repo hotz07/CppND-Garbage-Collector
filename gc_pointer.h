@@ -108,7 +108,7 @@ Pointer<T,size>::Pointer(T *t){
 
     // TODO: Implement Pointer constructor
     // Lab: Smart Pointer Project Lab
-
+    Pointer(t);
 }
 // Copy constructor.
 template< class T, int size>
@@ -116,7 +116,7 @@ Pointer<T,size>::Pointer(const Pointer &ob){
 
     // TODO: Implement Pointer constructor
     // Lab: Smart Pointer Project Lab
-
+    Pointer(ob);
 }
 
 // Destructor for Pointer.
@@ -169,7 +169,7 @@ T *Pointer<T, size>::operator=(T *t){
 
     // TODO: Implement operator==
     // LAB: Smart Pointer Project Lab
-
+    operator==(t);
 }
 // Overload assignment of Pointer to Pointer.
 template <class T, int size>
@@ -177,7 +177,7 @@ Pointer<T, size> &Pointer<T, size>::operator=(Pointer &rv){
 
     // TODO: Implement operator==
     // LAB: Smart Pointer Project Lab
-
+    operator==(rv);
 }
 
 // A utility function that displays refContainer.
