@@ -108,7 +108,7 @@ Pointer<T,size>::Pointer(T *t){
 
     // TODO: Implement Pointer constructor
     // Lab: Smart Pointer Project Lab
-    Pointer(t);
+    
 }
 
 // Copy constructor of Pointer class
@@ -175,7 +175,7 @@ T *Pointer<T, size>::operator=(T *t){
 
     // TODO: Implement operator==
     // LAB: Smart Pointer Project Lab
-    operator==(t);
+    return operator=(t);
 }
 
 // Overload assignment of Pointer to Pointer. (i.e ptr = ptr)
