@@ -108,7 +108,12 @@ Pointer<T,size>::Pointer(T *t){
 
     // TODO: Implement Pointer constructor
     // Lab: Smart Pointer Project Lab
-    
+    typename std::list<PtrDetails<T>>::iterator p;
+    p = findPtrInfo(addr);
+    p->refcount++; // increment ref count
+    refContainer.push_back(PtrDetails<T>(t, size));
+    addr = t;
+    arraySize = size;
 }
 
 // Copy constructor of Pointer class
@@ -175,7 +180,12 @@ T *Pointer<T, size>::operator=(T *t){
 
     // TODO: Implement operator==
     // LAB: Smart Pointer Project Lab
-    return operator=(t);
+    typename std::list<PtrDetails<T>>::iterator p;
+    p = findPtrInfo(addr);
+    p->refcount--;
+    refContainer.push_back(PtrDetails<T>(t, size));//
+    addr = t;
+    return t;
 }
 
 // Overload assignment of Pointer to Pointer. (i.e ptr = ptr)
